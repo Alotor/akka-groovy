@@ -1,0 +1,14 @@
+apply plugin: 'groovy'
+apply plugin: 'application'
+
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.4.6'
+    compile 'com.typesafe.akka:akka-actor_2.11:2.4.6'
+}
+
+mainClassName = "Main"
