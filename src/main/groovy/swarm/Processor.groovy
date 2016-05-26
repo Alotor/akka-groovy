@@ -26,14 +26,18 @@ public class Processor extends AbstractActor {
 
     void doStart(Msg message) {
         def t = new Random().nextInt(10000)
-        def timeout = new FiniteDuration(t, TimeUnit.MILLISECONDS)
+        // def timeout = new FiniteDuration(t, TimeUnit.MILLISECONDS)
 
         println " + Processor ${id} start (${t})"
 
         def system = context.system()
 
-        system.scheduler()
-              .scheduleOnce(timeout, self(), Msg.DONE, system.dispatcher(), self())
+        // system.scheduler()
+        //       .scheduleOnce(timeout, self(), Msg.DONE, system.dispatcher(), self())
+        println  " > sleeping ${id} - ${t}"
+
+        Thread.sleep(t)
+        self().tell(Msg.DONE, self())
     }
 
 }
