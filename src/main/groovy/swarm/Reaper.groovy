@@ -31,6 +31,7 @@ class Reaper extends UntypedActor {
                 break
 
             default:
+                println ">> Ein? ${message}"
                 unhandled(message);
         }
     }

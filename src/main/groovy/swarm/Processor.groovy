@@ -24,11 +24,23 @@ public class Processor extends AbstractActor {
         )
     }
 
+    @Override
+    void postRestart(Throwable reason) {
+        println ">> Restart ${id}"
+        self().tell(Msg.START, self())
+    }
+
     void doStart(Msg message) {
         def t = new Random().nextInt(10000)
         // def timeout = new FiniteDuration(t, TimeUnit.MILLISECONDS)
 
         println " + Processor ${id} start (${t})"
+
+        if (t < 1000) {
+            // Some processes caused random exceptions
+            println " ! Failing ${id}"
+            throw new Exception(">> Error in ${id}")
+        }
 
         def system = context.system()
 
